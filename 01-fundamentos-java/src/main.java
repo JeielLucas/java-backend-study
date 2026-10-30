@@ -11,8 +11,10 @@ void main(){
     converterTemperatura(-40);
 
     System.out.println("=== Média ===");
-    media(8, 7, 9);
-    media(5.5, 6.5, 8);
+    System.out.println(media(8, 7, 9));      // esperado: 8.0
+    System.out.println(media(5.5, 6.5, 8));  // aproximadamente: 6.6667
+    System.out.println(media(0, 0, 0));       // esperado: 0.0
+    System.out.println(media(10, 10, 10));    // esperado: 10.0
 
     System.out.println("=== Retângulo ===");
     retangulo(4, 3);
@@ -48,6 +50,48 @@ void main(){
     descontoCompra(199);
     descontoCompra(200);
     descontoCompra(250);
+
+    System.out.println("=== Soma de 1 até N ===");
+    System.out.println(somaNumeros(1)); // esperado: 1
+    System.out.println(somaNumeros(5)); // esperado: 15
+    System.out.println(somaNumeros(10)); // esperado: 55
+
+    System.out.println("=== Tabuada ===");
+    tabuada(3); // de 3 x 1 = 3 até 3 x 10 = 30
+
+    System.out.println("=== Fatorial ===");
+    System.out.println("0! = " + fatorial(0)); // 1
+    System.out.println("1! = " + fatorial(1)); // 1
+    System.out.println("5! = " + fatorial(5)); // 120
+
+    System.out.println("=== Soma dos dígitos ===");
+    System.out.println("381 → " + somaDigitos(381));  // 12
+    System.out.println("7 → " + somaDigitos(7));      // 7
+    System.out.println("5004 → " + somaDigitos(5004)); // 9
+
+    System.out.println("=== Número primo ===");
+    System.out.println(verificarPrimo(2)); // primo
+    System.out.println(verificarPrimo(11)); // primo
+    System.out.println(verificarPrimo(12)); // não primo
+    System.out.println(verificarPrimo(1));  // não primo
+
+    System.out.println("=== Calculadora ===");
+    calculadora(8, 2, '+'); // esperado: 10
+    calculadora(8, 2, '-'); // esperado: 6
+    calculadora(8, 2, '*'); // esperado: 16
+    calculadora(8, 2, '/'); // esperado: 4
+    calculadora(5, 2, '/'); // esperado: 2.5
+    calculadora(8, 0, '/'); // mensagem sobre divisão por zero
+    calculadora(8, 2, 'x'); // mensagem sobre operação inválida
+
+    System.out.println("=== Menor de três ===");
+    System.out.println(menorNumero(5, 2, 7));    // esperado: 2
+    System.out.println(menorNumero(2, 5, 7));    // esperado: 2
+    System.out.println(menorNumero(5, 7, 2));    // esperado: 2
+    System.out.println(menorNumero(4, 4, 9));    // esperado: 4
+    System.out.println(menorNumero(-3, -1, -7)); // esperado: -7
+
+
 }
 
 void parImpar(int n){
@@ -58,8 +102,8 @@ void converterTemperatura(double temp){
     System.out.println((temp *9/5) + 32);
 }
 
-void media(double n1, double n2, double n3){
-    System.out.println((n1+n2+n3) / 3);
+double media(double n1, double n2, double n3){
+    return ((n1+n2+n3) / 3);
 }
 
 void retangulo(double l, double h){
@@ -119,6 +163,87 @@ void descontoCompra(int valorCompra){
         System.out.println("Valor da compra não é aplicavel para desconto, valor total = R$" + valorCompra);
     }
 }
+
+int somaNumeros(int n){
+    int total = 0;
+    for(int i = 1; i <= n; i++){
+        total += i;
+    }
+    return total;
+}
+
+void tabuada(int n){
+    for(int i = 1; i <= 10; i++){
+        System.out.printf("%d x %d = %d\n", n, i, n*i);
+    }
+}
+
+int fatorial(int n){
+    int total = 0;
+    if(n == 0 || n == 1) return 1;
+    else if(n == 2) return n;
+    else{
+        total = n * fatorial(n-1);
+    }
+    return total;
+}
+
+int somaDigitos(int n){
+    int total = 0;
+    if(n < 10){
+        total += n;
+    }else{
+        total += n % 10;
+        n = n / 10;
+        total += somaDigitos(n);
+    }
+    return total;
+}
+
+boolean verificarPrimo(int n){
+    if(n == 0 || n == 1) return false;
+    else if(n == 2) return true;
+    else{
+        for(int i = 2; i < n; i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+void calculadora(int n1, int n2, char op) {
+    switch(op){
+        case '-':
+            System.out.printf("%d %s %d = %d\n", n1, op, n2, n1 - n2);
+            break;
+        case '+':
+            System.out.printf("%d %s %d = %d\n", n1, op, n2, n1 + n2);
+            break;
+        case '*':
+            System.out.printf("%d %s %d = %d\n", n1, op, n2, n1 * n2);
+            break;
+        case '/':
+            if(n2 == 0){
+                System.out.println("O divisor tem que ser diferente de 0");
+                break;
+            }
+            System.out.printf("%d %s %d = %.2f\n", n1, op, n2, (double) n1 / n2);
+            break;
+        default:
+            System.out.println("Operação inválida");
+            break;
+    }
+}
+
+int menorNumero(int n1, int n2, int n3){
+    int menor = n1 <= n2 ? n1 : n2;
+    menor = menor <= n3 ? menor : n3;
+
+    return menor;
+}
+
 
 
 
