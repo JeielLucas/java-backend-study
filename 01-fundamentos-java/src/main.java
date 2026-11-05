@@ -91,6 +91,28 @@ void main(){
     System.out.println(menorNumero(4, 4, 9));    // esperado: 4
     System.out.println(menorNumero(-3, -1, -7)); // esperado: -7
 
+    System.out.println("=== Maior e menor ===");
+    maiorMenor(new int[]{4, 9, 2});   // menor: 2, maior: 9
+    maiorMenor(new int[]{-3, 0, 8});  // menor: -3, maior: 8
+    maiorMenor(new int[]{5, 5, 5});   // menor: 5, maior: 5
+
+    System.out.println("=== Busca por posição ===");
+    System.out.println(buscarPosicao(new int[]{4, 9, 2}, 9)); // 2
+    System.out.println(buscarPosicao(new int[]{4, 9, 2}, 5)); // -1
+    System.out.println(buscarPosicao(new int[]{4, 9, 4}, 4)); // 1, primeira ocorrência
+
+    System.out.println("=== Contagem de vogais ===");
+    System.out.println(contarVogais("Computador")); // 4
+    System.out.println(contarVogais("A E i o U"));   // 5
+    System.out.println(contarVogais("rhythm"));      // 0
+    System.out.println(contarVogais("banana"));      // 3
+
+    System.out.println("=== Palíndromo ===");
+    System.out.println(palindromo("Ame a ema")); // true
+    System.out.println(palindromo("Java"));      // false
+    System.out.println(palindromo("A"));         // true
+    System.out.println(palindromo("a bba"));     // true, ignorando espaço e maiúsculas
+
 
 }
 
@@ -242,6 +264,61 @@ int menorNumero(int n1, int n2, int n3){
     menor = menor <= n3 ? menor : n3;
 
     return menor;
+}
+void maiorMenor(int[] arr){
+    int maior = arr[0];
+    int menor = arr[0];
+
+    for(int i = 1; i < arr.length; i++){
+        if(arr[i] > maior){
+            maior = arr[i];
+        }else if(arr[i] < menor){
+            menor = arr[i];
+        }
+    }
+    System.out.printf("menor: %d, maior: %d\n", menor, maior);
+}
+
+int buscarPosicao(int[] arr, int num){
+    for(int i = 0; i < arr.length; i++){
+        if(arr[i] == num){
+            return i + 1;
+        }
+    }
+    return -1;
+}
+
+int contarVogais(String palavra){
+    int contador = 0;
+    palavra = palavra.toLowerCase();
+    for(int i = 0; i < palavra.length(); i++){
+        char letra = Character.toLowerCase(palavra.charAt(i));
+        if("aeiou".indexOf(letra) >= 0){
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
+boolean palindromo(String palavra){
+    int tamanho = palavra.length();
+    int i = 0;
+    int j = tamanho - 1;
+    while(i < j){
+        if(palavra.charAt(i) == ' '){
+            i++;
+        }else if(palavra.charAt(j) == ' '){
+            j--;
+        }
+        else if(Character.toLowerCase(palavra.charAt(i)) == Character.toLowerCase(palavra.charAt(j))){
+            i++;
+            j--;
+        }else{
+            return false;
+        }
+    }
+    return true;
 }
 
 
