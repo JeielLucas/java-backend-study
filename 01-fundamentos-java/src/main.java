@@ -159,6 +159,14 @@ void main(){
     lista.concluir("Estudar Java");
     lista.listar(); // Estudar Java continua concluída; nada muda
 
+    System.out.println("=== Imprimir inteiro ===");
+    imprimirInteiro("42"); // 42
+    imprimirInteiro("-7"); // -7
+    imprimirInteiro("0"); // 0
+    imprimirInteiro("abc"); // Entrada inválida
+    imprimirInteiro("");  // Entrada inválida
+    imprimirInteiro("15");  // 15
+
 }
 
 void parImpar(int n){
@@ -392,6 +400,17 @@ void contarFrequencias(String[] arr){
     }
 
     System.out.println(frequencia);
+}
+
+void imprimirInteiro(String texto){
+    int numero;
+    try{
+        numero = Integer.parseInt(texto);
+    }catch (NumberFormatException ex){
+        System.out.println("Entrada inválida");
+        return;
+    }
+    System.out.println("Valor: " + numero);
 }
 
 
