@@ -18,4 +18,10 @@ public class Tarefa {
     public void concluir(){
         this.concluida = true;
     }
+
+    @Override
+    public String toString() {
+        String isConcluida = isConcluida() ? "Concluida" : "Pendente";
+        return getTitulo() + " | " + isConcluida;
+    }
 }

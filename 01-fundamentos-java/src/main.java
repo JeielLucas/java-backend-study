@@ -141,8 +141,23 @@ void main(){
     tarefa1.concluir();
     System.out.println(tarefa1.isConcluida()); // true, continua concluída
 
-  
+    System.out.println("=== Lista de tarefas ===");
+    ListaTarefas lista = new ListaTarefas();
 
+    lista.listar(); // Nenhuma tarefa cadastrada
+
+    lista.adicionar("Estudar Java");
+    lista.adicionar("Fazer exercícios");
+    lista.listar(); // 1. Estudar Java | pendente // 2. Fazer exercícios | pendente
+
+    lista.concluir("Estudar Java");
+    lista.listar(); // 1. Estudar Java | concluída // 2. Fazer exercícios | pendente
+
+    lista.concluir("Lavar o carro"); // aviso: tarefa não encontrada
+    lista.listar(); // a lista continua igual: Java concluída, exercícios pendentes
+
+    lista.concluir("Estudar Java");
+    lista.listar(); // Estudar Java continua concluída; nada muda
 
 }
 
