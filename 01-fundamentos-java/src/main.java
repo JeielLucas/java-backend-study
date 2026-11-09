@@ -113,6 +113,36 @@ void main(){
     System.out.println(palindromo("A"));         // true
     System.out.println(palindromo("a bba"));     // true, ignorando espaço e maiúsculas
 
+    System.out.println("=== Palavras distintas ===");
+    palavrasDistintas(new String[]{"java", "spring", "java", "sql", "spring"}); // esperado: java, spring, sql
+    palavrasDistintas(new String[]{"casa", "sol", "casa"}); // esperado: casa, sol
+    palavrasDistintas(new String[]{"map", "map", "map"}); // esperado: map
+    palavrasDistintas(new String[]{}); // esperado: nenhuma palavra
+    palavrasDistintas(new String[]{"Java", "java", "Java"}); // esperado: Java, java
+
+    System.out.println("=== Frequência de palavras ===");
+    contarFrequencias(new String[]{"java", "spring", "java"}); // java: 2, spring: 1
+    contarFrequencias(new String[]{"map", "map", "set"}); // map: 2, set: 1
+    contarFrequencias(new String[]{"sol"}); // sol: 1
+    contarFrequencias(new String[]{}); // nenhuma entrada, mapa vazio
+    contarFrequencias(new String[]{"Java", "java", "Java"}); // Java: 2, java: 1
+
+    System.out.println("=== Tarefa ===");
+    Tarefa tarefa1 = new Tarefa("Estudar Java");
+    Tarefa tarefa2 = new Tarefa("Fazer exercícios");
+
+    System.out.println(tarefa1.getTitulo() + " | concluída: " + tarefa1.isConcluida());// Estudar Java | concluída: false
+    System.out.println(tarefa2.getTitulo() + " | concluída: " + tarefa2.isConcluida()); // Fazer exercícios | concluída: false
+
+    tarefa1.concluir();
+    System.out.println(tarefa1.getTitulo() + " | concluída: " + tarefa1.isConcluida()); // Estudar Java | concluída: true
+    System.out.println(tarefa2.getTitulo() + " | concluída: " + tarefa2.isConcluida()); // Fazer exercícios | concluída: false
+
+    tarefa1.concluir();
+    System.out.println(tarefa1.isConcluida()); // true, continua concluída
+
+  
+
 
 }
 
@@ -265,6 +295,7 @@ int menorNumero(int n1, int n2, int n3){
 
     return menor;
 }
+
 void maiorMenor(int[] arr){
     int maior = arr[0];
     int menor = arr[0];
@@ -320,6 +351,35 @@ boolean palindromo(String palavra){
     }
     return true;
 }
+
+void palavrasDistintas(String[] arr){
+    Set<String> set = new LinkedHashSet<>();
+    if(arr.length != 0){
+        for(int i = 0; i < arr.length; i++){
+            set.add(arr[i]);
+        }
+    }else{
+        System.out.println("Nenhuma palavra");
+        return;
+    }
+    System.out.println(set);
+}
+
+void contarFrequencias(String[] arr){
+    Map<String, Integer> frequencia = new HashMap<>();
+    for (String s : arr) {
+        int contador = frequencia.getOrDefault(s, 0);
+        if (contador != 0) {
+            frequencia.put(s, contador + 1);
+        } else {
+            frequencia.put(s, 1);
+        }
+    }
+
+    System.out.println(frequencia);
+}
+
+
 
 
 
